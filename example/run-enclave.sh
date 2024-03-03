@@ -13,10 +13,10 @@ image_eif="$1"
 # https://github.com/brave-intl/bat-go/tree/master/nitro-shim/tools/gvproxy
 echo "[ec2] Starting gvproxy."
 wget -O gvproxy https://github.com/containers/gvisor-tap-vsock/releases/download/v0.7.3/gvproxy-linux-amd64
-chmod +x gvproxy
+chmod +x ./gvproxy
 
 killall gvproxy
-/home/ec2-user/enclaveid/gvproxy -listen vsock://:1024 -listen unix:///tmp/network.sock &
+./gvproxy -listen vsock://:1024 -listen unix:///tmp/network.sock &
 pid="$!"
 
 sleep 10
