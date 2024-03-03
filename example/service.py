@@ -12,7 +12,8 @@ def signal_ready():
 
 def fetch_addr():
     data = "94f12dd02d4de875db83be6fda36084132efed192b630427c6c784b8f5911e85".encode('utf-8')    
-    req = urllib.request.Request("http://127.0.0.1:8080/enclave/hash", data=data, method='POST').add_header('Content-Type', 'text/plain')
+    req = urllib.request.Request("http://127.0.0.1:8080/enclave/hash", data=data, method='POST')
+    req.add_header('Content-Type', 'text/plain')
     
     with urllib.request.urlopen(req) as response:
         response_body = response.read()
