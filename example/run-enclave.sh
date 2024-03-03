@@ -31,6 +31,3 @@ nitro-cli run-enclave \
 	--memory 600 \
 	--enclave-cid 4 \
 	--eif-path "$image_eif" 
-
-echo "[ec2] Stopping gvproxy."
-sudo kill -INT "$pid"
