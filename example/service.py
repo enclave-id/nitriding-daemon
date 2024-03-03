@@ -3,20 +3,23 @@
 import time
 import urllib.request
 
-nitriding_url = "http://127.0.0.1:8080/enclave/ready"
-
-
 def signal_ready():
-    r = urllib.request.urlopen(nitriding_url)
+    r = urllib.request.urlopen("http://127.0.0.1:8080/enclave/ready")
     if r.getcode() != 200:
         raise Exception("Expected status code %d but got %d" %
                         (requests.status_codes.codes.ok, r.status_code))
 
 
 def fetch_addr():
-    url = "https://raw.githubusercontent.com/brave/nitriding-daemon/master/README.md"
-    with urllib.request.urlopen(url) as f:
-        print("[py] Fetched %d bytes of README.md." % len(f.read(100)))
+    data = "94f12dd02d4de875db83be6fda36084132efed192b630427c6c784b8f5911e85".encode('utf-8')    
+    req = urllib.request.Request("http://127.0.0.1:8080/enclave/hash", data=data, method='POST').add_header('Content-Type', 'text/plain')
+    
+    with urllib.request.urlopen(req) as response:
+        response_body = response.read()
+    
+    print("[py] Added key digest.")
+    print(response_body.decode('utf-8'))
+
 
 
 if __name__ == "__main__":
