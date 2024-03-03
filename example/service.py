@@ -24,5 +24,9 @@ if __name__ == "__main__":
     print("[py] Signalled to nitriding that we're ready.")
 
     time.sleep(1)
+
     fetch_addr()
     print("[py] Made Web request to the outside world.")
+
+    print("[py] Sleeping for 1 hour.")
+    time.sleep(3600)
