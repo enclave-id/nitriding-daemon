@@ -1,6 +1,6 @@
 # A Go base image is enough to build nitriding reproducibly.
 # We use a specific instead of the latest image to ensure reproducibility.
-FROM golang:1.20 as builder
+FROM golang:1.22 as builder
 
 WORKDIR /
 
@@ -15,7 +15,7 @@ COPY service.py start.sh /bin/
 RUN chown root:root /bin/service.py /bin/start.sh
 RUN chmod 0755      /bin/service.py /bin/start.sh
 
-FROM python:3.11-slim-bullseye
+FROM python:3.12-slim-bullseye
 
 # Copy all our files to the final image.
 COPY --from=builder /nitriding-daemon/nitriding /bin/start.sh /bin/service.py /bin/
